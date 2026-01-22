@@ -43,4 +43,4 @@ This project is dedicated to deploying Azure API Management (APIM) with OpenTofu
 
 ## Contributing
 
-[Add contribution guidelines here]:# IaC-Azure-APIM
+[Add contribution guidelines here]
