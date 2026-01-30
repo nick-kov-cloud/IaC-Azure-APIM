@@ -32,31 +32,32 @@ The goal is to create a scalable, secure, and maintainable APIM service that can
    ```Bash
    git checkout -b feature/your-feature-name
 3. **Install Dependencies**: Navigate to the project directory and run all necessary dependencies:  
-  - **[opentofu](.github/skills/opentofu-install/SKILLS.md)**
-  - **[terraspace](.github/skills/terraspace-install/SKILLS.md)**  
-  - **[azure-cli](.github/skills/azure-cli-install/SKILLS.md)**
+  - **[opentofu](../skills/opentofu-install/SKILLS.md)**
+  - **[terraspace](../skills/terraspace-install/SKILLS.md)**  
+  - **[azure-cli](../skills/azure-cli-install/SKILLS.md)**
 4. **Authenticate with Azure**: Use `az login` to authenticate your Azure CLI with your Azure account.
 5. **Set Subscription**: If you have multiple subscriptions, set the active subscription using:  
    ```Bash
    az account set --subscription "YOUR_SUBSCRIPTION_ID"
    ```
 6. **Generate Terraspace Config folders and files**: Run the terraspace config generation steps as per the project guidelines:  
-  - **[terraspace config](.github/skills/tofu-terraspace-setup/SKILLS.md)**
+  - **[terraspace config](../skills/tofu-terraspace-setup/SKILLS.md)**
 4. **Configure Backend**: Ensure that the Terraspace backend is configured to use Azure Storage for remote state management.
 5. **Set Environment Variables**: Configure any required environment variables for authentication and configuration.
 7. **Run a smoke test**: The smoke test will generate a stack for provisioning resource groups and verify that everything is working correctly:
-  - **[Run a smoke test](.github/skills/smoke-test/SKILLS.md)**
+  - **[Run a smoke test](../skills/smoke-test/SKILLS.md)**
 
 
 ## APIM Service Provisioning Steps
 1. **Create Resource Group tofu module**: Create a new tofu reusable module.
 2. **Create APIM reusable tofu module**: Create a new tofu reusable module for APIM.
+  Reference: - **[APIM Design Guide](../../docs/APIM-V2-TIER.md)**
 3. **Create Terraspace Stack for APIM**: Generate a new corresponding Terraspace stack for the APIM module.
     - utilise the resource group module to create a new resource group and APIM service.
     - utilise best practices for naming conventions, tagging, and configuration as per the project guidelines.
-      - **[Enterprise Best Practices](docs/ENTERPRISE-BEST-PRACTICES.md)**
+      - **[Enterprise Best Practices](../../docs/ENTERPRISE-BEST-PRACTICES.md)**
     - utilise security best practices for APIM deployment.
-      - **[Security Best Practices](docs/SECURITY-BEST-PRACTICES.md)**
+      - **[Security Best Practices](../../docs/SECURITY-BEST-PRACTICES.md)**
 4. **Define APIM Resources**: In the newly created stack, define the necessary resources for the APIM service in the `main.tf`, `variables.tf`, and `outputs.tf` files.
 5. **Initialize Terraspace**: Run `terraspace init` to initialize the Terraspace project.
 6. **Validate Configuration**: Execute `terraspace validate` to ensure the configuration is correct.
