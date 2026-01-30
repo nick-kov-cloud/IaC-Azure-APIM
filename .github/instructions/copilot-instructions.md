@@ -21,7 +21,7 @@ description: Core instructions for provisioning an Enterprise grade shared Azure
 The goal is to create a scalable, secure, and maintainable APIM service that can be shared across multiple teams and applications within the organization. The project adheres to best practices in both Opentofu and Terraspace, ensuring that the infrastructure is robust and compliant with security standards.md template provided in the repository.
 
 
-1. **Run Initial Setup**: Execute any initial setup
+1.
 
 
 ---
@@ -31,7 +31,8 @@ The goal is to create a scalable, secure, and maintainable APIM service that can
 2. **Create a feature branch**: Create a new branch for your work to keep changes organized.
    ```Bash
    git checkout -b feature/your-feature-name
-3. **Install Dependencies**: Navigate to the project directory and run all necessary dependencies:  
+3. **Run Initial Setup**: Execute any initial setup and Install Dependencies if required
+  - Navigate to the project directory and run all necessary dependencies:  
   - **[opentofu](../skills/opentofu-install/SKILLS.md)**
   - **[terraspace](../skills/terraspace-install/SKILLS.md)**  
   - **[azure-cli](../skills/azure-cli-install/SKILLS.md)**
@@ -40,6 +41,20 @@ The goal is to create a scalable, secure, and maintainable APIM service that can
    ```Bash
    az account set --subscription "YOUR_SUBSCRIPTION_ID"
    ```
+
+6. **Project & Provider Standards**
+- Engine: OpenTofu (Binary: `tofu`).
+- Framework: Terraspace (Orchestration).
+- Provider: `azurerm` (Source: `opentofu/azurerm`, Version: `~> 4.0`).
+- Global Config: Every stack must include `provider "azurerm" { features {} }`.
+- Terraspace Settings: Ensure `config.build.type = "opentofu"` in `config/app.rb`.
+- Terraspace needs to know it should execute tofu instead of terraform. You should configure this in your project so the following is set:
+- Update config/app.rb:
+```
+Terraspace.configure do |config|
+  config.build.type = "opentofu" # Forces Terraspace to use tofu binary
+end
+```
 6. **Generate Terraspace Config folders and files**: Run the terraspace config generation steps as per the project guidelines:  
   - **[terraspace config](../skills/tofu-terraspace-setup/SKILLS.md)**
 4. **Configure Backend**: Ensure that the Terraspace backend is configured to use Azure Storage for remote state management.
@@ -49,6 +64,7 @@ The goal is to create a scalable, secure, and maintainable APIM service that can
 
 
 ## APIM Service Provisioning Steps
+
 1. **Create Resource Group tofu module**: Create a new tofu reusable module.
 2. **Create APIM reusable tofu module**: Create a new tofu reusable module for APIM.
   Reference: - **[APIM Design Guide](../../docs/APIM-V2-TIER.md)**
